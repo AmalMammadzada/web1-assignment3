@@ -3,7 +3,7 @@ import projects from './projectsData';
 
 const HomePage = () => {
   return (
-    <div className="home-page">
+    <div className="homepage">
       <section className="introduction">
         <h1>Welcome to My Portfolio</h1>
         <p>This is a general introduction to your portfolio.</p>
