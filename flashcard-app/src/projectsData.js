@@ -1,4 +1,3 @@
-// projectsData.js
 const projects = [
     {
       id: 1,
