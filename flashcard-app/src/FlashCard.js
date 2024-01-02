@@ -14,12 +14,12 @@ const FlashCard = ({ question, answer, lastModified }) => {
       <div className={`card-inner ${showAnswer ? 'show-answer' : ''}`}>
         <div className="card-front">
           <p>{question}</p>
-          {/* Additional content for the front side of the card (e.g., images) */}
+          {/* For additional content for the front side of the card*/}
         </div>
         <div className="card-back">
           <p>{answer}</p>
           <p>Last Modified: {lastModified}</p>
-          {/* Additional content for the back side of the card */}
+          {/* For additional content for the back side of the card */}
         </div>
       </div>
     </div>

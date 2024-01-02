@@ -8,13 +8,13 @@ const projects = [
     {
       id: 2,
       name: 'Data Fetching Website',
-      description: 'Fetching data from an API and dynamically populating a web page with the loaded data in a user-friendly format',
+      description: 'Fetching data from an API and dynamically populating a web page with the loaded data in a user friendly format',
       link: 'https://github.com/AmalMammadzada/web1-assignment2',
     },
     {
         id: 3,
         name: 'Project 3',
-        description: 'Simple parkour game in Unity',
+        description: 'My simple parkour game in Unity',
         link: 'https://github.com/AmalMammadzada/UnityProjects',
       },
     // Add more project objects as needed
