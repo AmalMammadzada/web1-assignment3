@@ -1,0 +1,55 @@
+/* FlashCardsPage.css */
+
+.flashcards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .flashcards-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .add-card-form {
+    background-color: #f8f8f8;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: 600px;
+  }
+  
+  .add-card-form div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .add-card-form input[type="text"] {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 180px;
+  }
+  
+  .add-card-form button {
+    padding: 10px 15px;
+    background-color: #004d99;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .add-card-form button:hover {
+    background-color: #003366;
+  }
