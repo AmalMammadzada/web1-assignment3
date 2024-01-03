@@ -1,0 +1,74 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "frontContent": "What is 2+2?",
+      "backContent": "4",
+      "lastModified": "2021-01-01T00:00:00.000Z",
+      "status": "Learned"
+    },
+    {
+      "id": 2,
+      "frontContent": "Capital of France?",
+      "backContent": "Paris",
+      "lastModified": "2021-01-02T00:00:00.000Z",
+      "status": "Want to Learn"
+    },
+    {
+      "id": 3,
+      "frontContent": "Largest planet in our solar system?",
+      "backContent": "Jupiter",
+      "lastModified": "2021-01-03T00:00:00.000Z",
+      "status": "Noted"
+    },
+    {
+      "id": 4,
+      "frontContent": "Who wrote 'Hamlet'?",
+      "backContent": "William Shakespeare",
+      "lastModified": "2021-01-04T00:00:00.000Z",
+      "status": "Learned"
+    },
+    {
+      "id": 5,
+      "frontContent": "The chemical formula of water?",
+      "backContent": "H2O",
+      "lastModified": "2021-01-05T00:00:00.000Z",
+      "status": "Want to Learn"
+    },
+    {
+      "id": 6,
+      "frontContent": "Year of the first moon landing?",
+      "backContent": "1969",
+      "lastModified": "2021-01-06T00:00:00.000Z",
+      "status": "Learned"
+    },
+    {
+      "id": 7,
+      "frontContent": "What is the capital of Spain?",
+      "backContent": "Madrid",
+      "lastModified": "2021-01-07T00:00:00.000Z",
+      "status": "Want to Learn"
+    },
+    {
+      "id": 8,
+      "frontContent": "Element with the symbol 'Fe'?",
+      "backContent": "Iron",
+      "lastModified": "2021-01-08T00:00:00.000Z",
+      "status": "Noted"
+    },
+    {
+      "id": 9,
+      "frontContent": "Largest mammal in the world?",
+      "backContent": "Blue Whale",
+      "lastModified": "2021-01-09T00:00:00.000Z",
+      "status": "Want to Learn"
+    },
+    {
+      "id": 10,
+      "frontContent": "First man in space?",
+      "backContent": "Yuri Gagarin",
+      "lastModified": "2021-01-10T00:00:00.000Z",
+      "status": "Learned"
+    }
+  ]
+}

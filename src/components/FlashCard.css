@@ -1,0 +1,142 @@
+/* FlashCard.css */
+
+.flashcard {
+    width: 300px;
+    height: 200px;
+    margin: 15px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  .card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+  }
+  
+  .card-front {
+    background-color: #fff;
+  }
+  
+  .card-back {
+    background-color: #f8f8f8;
+    transform: rotateY(180deg);
+  }
+  
+  .flashcard.flipped .card-front {
+    transform: rotateY(180deg);
+  }
+  
+  .flashcard.flipped .card-back {
+    transform: rotateY(0deg);
+  }
+  
+  .flashcard-container {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .flashcard {
+    width: 300px;
+    height: 200px;
+    margin: 0 auto; /* Center the card */
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  .card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+  }
+  
+  .card-front {
+    background-color: #fff;
+  }
+  
+  .card-back {
+    background-color: #f8f8f8;
+    transform: rotateY(180deg);
+  }
+  
+  .flashcard.flipped .card-front {
+    transform: rotateY(180deg);
+  }
+  
+  .flashcard.flipped .card-back {
+    transform: rotateY(0deg);
+  }
+  
+  .card-details {
+    margin-top: 10px;
+  }
+
+  .card-details {
+    margin-top: 2px;
+    font-size: 0.7em;
+    color: #555;
+    text-align: center;
+  }
+  
+  .card-details p {
+    margin: 5px 0; /* Spacing between lines */
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    display: inline-block;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-details select {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .flashcard img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .card-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+  }
+  
+  .flashcard-container:hover .card-actions {
+    display: block;
+  }
+
+  .flashcard-container .card-actions button {
+    padding: 8px 12px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    background-color: #004d99;;
+}
