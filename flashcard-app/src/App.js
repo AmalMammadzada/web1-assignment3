@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HomePage from './components/HomePage';
 import FlashCardsPage from './components/FlashCardsPage';
-
-//FlashCardsPage, ContactPage
 import './App.css';
 
 function App() {
@@ -16,7 +14,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/flashcards" element={<FlashCardsPage />} />
+          <Route path="/flashcards" element={<FlashCardsPage />} />    
         </Routes>
       </div>
     </Router>

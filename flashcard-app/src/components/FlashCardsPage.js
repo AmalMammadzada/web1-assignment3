@@ -13,34 +13,43 @@ const FlashCardsPage = () => {
     useEffect(() => {
         fetch('http://localhost:3001/cards')
             .then(response => response.json())
-            .then(data => setCards(data))
+            .then(data => {
+                setCards(data);
+                console.log('Cards fetched:', data); // Debugging line
+            })
             .catch(error => console.error('Error fetching cards:', error));
     }, []);
 
+    const updateCardsOnServer = (updatedCards) => {
+        fetch('http://localhost:3001/cards', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedCards)
+        })
+        .then(response => response.json())
+        .then(() => {
+            setCards(updatedCards);
+        })
+        .catch(error => console.error('Error updating cards:', error));
+    };
+
     const handleStatusChange = (cardId, newStatus) => {
-        setCards(prevCards => prevCards.map(card =>
+        const updatedCards = cards.map(card =>
             card.id === cardId ? { ...card, status: newStatus, lastModified: new Date().toISOString() } : card
-        ));
+        );
+        setCards(updatedCards);
+        console.log('Cards after status change:', updatedCards); // Debugging line
     };
 
     const addNewCard = (cardData, id) => {
-        if (id) {
-            setCards(prevCards => prevCards.map(card =>
-                card.id === id ? { ...card, ...cardData, lastModified: new Date().toISOString() } : card
-            ));
-        } else {
-            fetch('http://localhost:3001/cards', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ ...cardData, id: new Date().getTime().toString() }) // Adding an ID here for new card
-            })
-            .then(response => response.json())
-            .then(newCard => setCards(prevCards => [...prevCards, newCard]))
-            .catch(error => console.error('Error adding card:', error));
-            setShowAddCardForm(false);
-        }
+        const newCard = { ...cardData, id: id || new Date().getTime().toString(), lastModified: new Date().toISOString() };
+        const updatedCards = id ? cards.map(card =>
+            card.id === id ? newCard : card
+        ) : [...cards, newCard];
+
+        updateCardsOnServer(updatedCards);
     };
 
     const handleEditCard = (cardId) => {
@@ -49,31 +58,27 @@ const FlashCardsPage = () => {
     };
 
     const handleDeleteCard = (cardId) => {
-        fetch(`http://localhost:3001/cards/${cardId}`, {
-            method: 'DELETE',
-        })
-        .then(() => {
-            setCards(prevCards => prevCards.filter(card => card.id !== cardId));
-        })
-        .catch(error => console.error('Error deleting card:', error));
+        const updatedCards = cards.filter(card => card.id !== cardId);
+        updateCardsOnServer(updatedCards);
     };
 
     const onSave = (cardId, updatedCardData) => {
-      setCards(prevCards => prevCards.map(card =>
-          card.id === cardId ? { ...card, ...updatedCardData, lastModified: new Date().toISOString() } : card
-      ));
-  };
+        const updatedCards = cards.map(card =>
+            card.id === cardId ? { ...card, ...updatedCardData, lastModified: new Date().toISOString() } : card
+        );
+        updateCardsOnServer(updatedCards);
+    };
 
-  const toggleAddCardForm = () => {
-      setShowAddCardForm(!showAddCardForm);
-      setEditingCard(null);
-  };
+    const toggleAddCardForm = () => {
+        setShowAddCardForm(!showAddCardForm);
+        setEditingCard(null);
+    };
 
-  const filteredCards = cards.filter(card =>
-      (card.frontContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      card.backContent.toLowerCase().includes(searchQuery.toLowerCase())) &&
-      (filterStatus === 'All' || card.status === filterStatus)
-  );
+    const filteredCards = cards.filter(card => {
+        const matchesSearchQuery = card.frontContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                   card.backContent.toLowerCase().includes(searchQuery.toLowerCase());
+        return filterStatus === 'All' || card.status === filterStatus ? matchesSearchQuery : false;
+    });
 
     return (
         <div className="flashcards-container">

@@ -6,27 +6,28 @@
   justify-content: space-around;
   padding: 20px;
   max-width: 100%;
-  margin: auto;
 }
 
 .flashcard {
-  width: calc(33.33% - 30px); /* Adjust width to fit 3 cards per row */
-  margin: 15px; /* Adjust margin as needed */
-  /* Ensure other styles are not conflicting */
+  flex: 0 0 calc((100% / 3) - 40px); /* Adjust for 3 cards per row */
+  max-width: 300px; /* Maximum width of each card */
+  min-width: 250px; /* Minimum width of each card */
+  margin: 15px;
+  box-sizing: border-box; /* Include padding and borders in the width */
 }
 
-/* Add a media query if the container's width might be less than the total width of three cards */
-@media (max-width: 960px) { /* Adjust breakpoint as needed */
+@media (max-width: 960px) {
   .flashcard {
-    width: calc(50% - 30px); /* Two cards per row for smaller screens */
+    flex: 0 0 calc((100% / 2) - 30px); /* 2 cards per row */
   }
 }
 
-@media (max-width: 600px) { /* Adjust breakpoint as needed */
+@media (max-width: 600px) {
   .flashcard {
-    width: calc(100% - 30px); /* One card per row for very small screens */
+    flex: 0 0 calc(100% - 20px); /* 1 card per row */
   }
 }
+
 
 .add-card-form {
   background-color: #f8f8f8;
