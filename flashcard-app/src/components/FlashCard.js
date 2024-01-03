@@ -6,8 +6,7 @@ const FlashCard = ({ card, onStatusChange, onEdit, onDelete, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editableFrontContent, setEditableFrontContent] = useState(card.frontContent);
   const [editableBackContent, setEditableBackContent] = useState(card.backContent);
-  const [cardStatus, setCardStatus] = useState(card.status); // Renamed from 'status' to 'cardStatus'
-  
+  const [cardStatus, setCardStatus] = useState(card.status);
 
   const flipCard = () => setIsFlipped(!isFlipped);
 
@@ -17,7 +16,11 @@ const FlashCard = ({ card, onStatusChange, onEdit, onDelete, onSave }) => {
   };
 
   const handleSaveClick = () => {
-    onSave(card.id, editableFrontContent, editableBackContent);
+    onSave(card.id, {
+      frontContent: editableFrontContent,
+      backContent: editableBackContent,
+      status: cardStatus
+    });
     setIsEditing(false);
   };
 
@@ -26,20 +29,18 @@ const FlashCard = ({ card, onStatusChange, onEdit, onDelete, onSave }) => {
       <textarea 
         value={content} 
         onChange={e => isFlipped ? setEditableBackContent(e.target.value) : setEditableFrontContent(e.target.value)}
-        onClick={(e) => e.stopPropagation()} // Add this line to stop propagation
+        onClick={(e) => e.stopPropagation()}
       />
     ) : (
       <p>{content}</p>
     );
   };
 
-  const handleCardStatusChange = (e) => {  // Renamed to handleCardStatusChange
+  const handleCardStatusChange = (e) => {
     const newStatus = e.target.value;
     setCardStatus(newStatus);
     onStatusChange(card.id, newStatus);
   };
-
-  
 
   return (
     <div className="flashcard-container">

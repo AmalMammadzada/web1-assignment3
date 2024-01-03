@@ -1,12 +1,31 @@
 /* FlashCardsPage.css */
 
-.flashcards-container {
+.flashcards-display {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; /* This will space out the cards evenly */
+  justify-content: space-around;
   padding: 20px;
-  max-width: 100%; /* Adjust the width as needed */
+  max-width: 100%;
   margin: auto;
+}
+
+.flashcard {
+  width: calc(33.33% - 30px); /* Adjust width to fit 3 cards per row */
+  margin: 15px; /* Adjust margin as needed */
+  /* Ensure other styles are not conflicting */
+}
+
+/* Add a media query if the container's width might be less than the total width of three cards */
+@media (max-width: 960px) { /* Adjust breakpoint as needed */
+  .flashcard {
+    width: calc(50% - 30px); /* Two cards per row for smaller screens */
+  }
+}
+
+@media (max-width: 600px) { /* Adjust breakpoint as needed */
+  .flashcard {
+    width: calc(100% - 30px); /* One card per row for very small screens */
+  }
 }
 
 .add-card-form {
@@ -105,3 +124,4 @@
   border-radius: 4px;
   border: 1px solid #ddd;
 }
+
