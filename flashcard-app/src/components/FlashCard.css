@@ -41,6 +41,7 @@
   .flashcard-container {
     text-align: center;
     margin-bottom: 20px;
+    position: relative;
   }
   
   .flashcard {
@@ -110,4 +111,19 @@
     cursor: pointer;
   }
 
+  .flashcard img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .card-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+  }
   
+  .flashcard-container:hover .card-actions {
+    display: block;
+  }

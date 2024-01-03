@@ -1,94 +1,130 @@
 import React, { useState, useEffect } from 'react';
+import AddCardForm from './AddCardForm'; // Assuming AddCardForm is in the same directory
 import FlashCard from './FlashCard';
 import './FlashCardsPage.css';
 
-const AddCardForm = ({ onAddCard }) => {
-  const [frontContent, setFrontContent] = useState('');
-  const [backContent, setBackContent] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!frontContent || !backContent) return; // Basic validation
-
-    onAddCard({
-      frontContent,
-      backContent,
-      lastModified: new Date().toISOString(),
-      status: 'Want to Learn' // Default status
-    });
-
-    // Reset form fields
-    setFrontContent('');
-    setBackContent('');
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="add-card-form">
-      <div>
-        <label>Front Content: </label>
-        <input
-          type="text"
-          value={frontContent}
-          onChange={(e) => setFrontContent(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Back Content: </label>
-        <input
-          type="text"
-          value={backContent}
-          onChange={(e) => setBackContent(e.target.value)}
-        />
-      </div>
-      <button type="submit">Add Card</button>
-    </form>
-  );
-};
-
 const FlashCardsPage = () => {
-  const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState([]);
+    const [editingCard, setEditingCard] = useState(null);
+    const [showAddCardForm, setShowAddCardForm] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filterStatus, setFilterStatus] = useState('All');
 
-  useEffect(() => {
-    const fetchedCards = [
-      {
-        id: 1,
-        frontContent: 'What is the capital of France?',
-        backContent: 'Paris',
-        lastModified: new Date().toISOString(),
-        status: 'Want to Learn'
-      },
-      {
-        id: 2,
-        frontContent: 'What is the capital of Azerbaijan?',
-        backContent: 'Baku',
-        lastModified: new Date().toISOString(),
-        status: 'Want to Learn'
-      },
-      // Add more cards
-    ];
-    
-    setCards(fetchedCards);
-  }, []);
+    useEffect(() => {
+      fetch('http://localhost:3000/cards')
+        .then(response => response.json())
+        .then(data => setCards(data))
+        .catch(error => console.error('Error fetching cards:', error));
+    }, []);
 
-  const handleStatusChange = (cardId, newStatus) => {
-    setCards(prevCards => 
-      prevCards.map(card => 
-        card.id === cardId ? { ...card, status: newStatus, lastModified: new Date().toISOString() } : card
-      )
+    const handleStatusChange = (cardId, newStatus) => {
+        setCards(prevCards => prevCards.map(card =>
+            card.id === cardId ? { ...card, status: newStatus, lastModified: new Date().toISOString() } : card
+        ));
+    };
+
+    const addNewCard = (cardData, id) => {
+        if (id) {
+            setCards(prevCards => prevCards.map(card =>
+                card.id === id ? { ...card, ...cardData, lastModified: new Date().toISOString() } : card
+            ));
+        } else {
+          // Add new card
+          fetch('http://localhost:3000/cards', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ...cardData, lastModified: new Date().toISOString() })
+          })
+          .then(response => response.json())
+          .then(newCard => setCards(prevCards => [...prevCards, newCard]))
+          .catch(error => console.error('Error adding card:', error));
+      
+          setShowAddCardForm(false);
+        }
+      };
+
+    const handleEditCard = (cardId) => {
+        const cardToEdit = cards.find(card => card.id === cardId);
+        setEditingCard(cardToEdit);
+    };
+
+    const handleDeleteCard = (cardId) => {
+      fetch(`http://localhost:3000/cards/${cardId}`, {
+        method: 'DELETE',
+      })
+      .then(() => {
+        setCards(prevCards => prevCards.filter(card => card.id !== cardId));
+      })
+      .catch(error => console.error('Error deleting card:', error));
+    };
+
+    const handleSaveEditedCard = (cardId, frontContent, backContent) => {
+      const updatedCard = { frontContent, backContent, lastModified: new Date().toISOString() };
+      
+      fetch(`http://localhost:3000/cards/${cardId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedCard)
+      })
+      .then(response => response.json())
+      .then(updatedCard => {
+        setCards(prevCards => prevCards.map(card => 
+          card.id === cardId ? { ...card, ...updatedCard } : card
+        ));
+      })
+      .catch(error => console.error('Error updating card:', error));
+    };
+
+    const toggleAddCardForm = () => {
+        setShowAddCardForm(!showAddCardForm);
+        setEditingCard(null);
+    };
+
+    const filteredCards = cards.filter(card =>
+        (card.frontContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        card.backContent.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        (filterStatus === 'All' || card.status === filterStatus)
     );
-  };
 
-  const addNewCard = (newCardData) => {
-    setCards(prevCards => [...prevCards, { ...newCardData, id: Date.now() }]);
-  };
+    return (
+      <div className="flashcards-container">
+          <div className="controls-section">
+              <div className="top-controls">
+                  <button className="open-add-card-btn" onClick={toggleAddCardForm}>
+                      {showAddCardForm ? 'Close Add Card Form' : 'Open Add Card Form'}
+                  </button>
 
-  return (
-    <div className="flashcards-container">
-      <AddCardForm onAddCard={addNewCard} />
-      {cards.map(card => (
-        <FlashCard key={card.id} card={card} onStatusChange={handleStatusChange} />
-      ))}
-    </div>
+                  <input 
+                      type="text" 
+                      className="search-input"
+                      placeholder="Search cards..." 
+                      value={searchQuery} 
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+
+                  <div className="filter-section">
+                      <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+                          <option value="All">All</option>
+                          <option value="Learned">Learned</option>
+                          <option value="Want to Learn">Want to Learn</option>
+                          <option value="Noted">Noted</option>
+                      </select>
+                  </div>
+              </div>
+
+              {showAddCardForm && (
+                  <AddCardForm onAddCard={addNewCard} editingCard={editingCard} />
+              )}
+          </div>
+
+          {cards.map(card => (
+    <FlashCard key={card.id} card={card} {...otherProps} />
+))}
+      </div>
   );
 };
 

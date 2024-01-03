@@ -1,0 +1,19 @@
+{
+    "cards": [
+      {
+        "id": 1,
+        "frontContent": "What is the capital of France?",
+        "backContent": "Paris",
+        "lastModified": "2023-01-01T00:00:00.000Z",
+        "status": "Want to Learn"
+      },
+      {
+        "id": 2,
+        "frontContent": "What is the capital of Japan?",
+        "backContent": "Tokyo",
+        "lastModified": "2023-01-02T00:00:00.000Z",
+        "status": "Learned"
+      }
+    ]
+  }
+  

@@ -1,55 +1,107 @@
 /* FlashCardsPage.css */
 
 .flashcards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .flashcards-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-  }
-  
-  .add-card-form {
-    background-color: #f8f8f8;
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    max-width: 600px;
-  }
-  
-  .add-card-form div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .add-card-form input[type="text"] {
-    padding: 8px;
-    margin: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 180px;
-  }
-  
-  .add-card-form button {
-    padding: 10px 15px;
-    background-color: #004d99;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .add-card-form button:hover {
-    background-color: #003366;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* This will space out the cards evenly */
+  padding: 20px;
+  max-width: 100%; /* Adjust the width as needed */
+  margin: auto;
+}
+
+.add-card-form {
+  background-color: #f8f8f8;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 600px;
+}
+
+.add-card-form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-card-form input[type="text"] {
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 180px;
+}
+
+.add-card-form button {
+  padding: 10px 15px;
+  background-color: #004d99;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-card-form button:hover {
+  background-color: #003366;
+}
+
+.open-add-card-btn {
+  padding: 5px 10px; /* Reduced padding */
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: none;
+  border-radius: 4px;
+  font-size: 12px; /* Reduced font size */
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  display: block; /* Changed to block for alignment */
+  width: auto; /* Adjust width as needed */
+  margin: 0 0 20px; /* Add some margin if needed */
+  align-self: flex-start; /* Aligns to the left */
+}
+
+.open-add-card-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.search-input {
+  padding: 8px;
+  margin-bottom: 20px; /* Add space below the search bar */
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  width: 100%; /* Adjust as needed */
+  box-sizing: border-box; /* Ensures padding doesn't increase width */
+}
+
+.controls-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px; /* Adds space between elements */
+  margin-bottom: 20px;
+}
+
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Adds space between elements */
+}
+
+.search-input {
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.filter-section select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
